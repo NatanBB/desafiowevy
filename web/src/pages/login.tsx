@@ -1,7 +1,7 @@
 import React, { useState, FormEvent, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import Input from '../components/Input';
+import { Input } from '../components/Input';
 import logo from '../assets/logo.png';
 import { Button } from '../components/Button';
 

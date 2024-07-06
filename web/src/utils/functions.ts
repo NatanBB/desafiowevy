@@ -1,6 +1,5 @@
 import { TodoItem } from "../types/commonTypes";
 
-
 /**
  * Format Date to String
  * @param date Date to Format

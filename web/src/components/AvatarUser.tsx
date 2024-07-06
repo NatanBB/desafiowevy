@@ -1,4 +1,6 @@
-import { AvatarUserProps } from "../types/commonTypes"
+interface AvatarUserProps {
+  avatarUrl: string;
+}
 
 export const AvatarUser = ({
   avatarUrl

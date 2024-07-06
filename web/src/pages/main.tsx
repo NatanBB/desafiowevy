@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowsMaximize, Minimize, Plus } from 'tabler-icons-react';
-import Input from '../components/Input';
+import { Input } from '../components/Input';
 import { ListTodo } from '../modules/listTodo';
 import { TodoItem } from '../types/commonTypes';
 import { Header } from '../modules/header';

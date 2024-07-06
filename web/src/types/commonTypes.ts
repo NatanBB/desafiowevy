@@ -37,10 +37,6 @@ export type User = {
   avatarUrl?: string;
 }
 
-export type AvatarUserProps = {
-  avatarUrl: string;
-}
-
 export type FooterProps = {
   onLogout: () => void;
 }

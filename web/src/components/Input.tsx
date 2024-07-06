@@ -14,7 +14,7 @@ interface InputProps {
   styles?: string;
 }
 
-export default function Input({
+export const Input = ({
   handleChange,
   value,
   type,
@@ -23,7 +23,7 @@ export default function Input({
   searchIcon = false,
   useTextArea = false,
   styles
-}: InputProps): JSX.Element {
+}: InputProps): JSX.Element => {
   return (
     <>
       <div>

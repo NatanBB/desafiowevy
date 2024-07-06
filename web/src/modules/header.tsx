@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { AvatarUser } from "../components/AvatarUser"
-import Input from "../components/Input";
+import { Input } from "../components/Input";
 import { HeaderProps, User } from "../types/commonTypes";
 import { useAuth } from "../contexts/AuthContext";
 
