@@ -8,7 +8,6 @@
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.101",
     "axios": "^1.7.2",
-    "json-server": "^1.0.0-beta.1",
     "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
