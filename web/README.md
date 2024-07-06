@@ -1,46 +1,86 @@
-# Getting Started with Create React App
+# Front Development Docs
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains the frontend for WevyTask. It is built using React, Typescript, Tailwind, React Router, Test Library.
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+To get a local copy up and running follow these simple example steps.
 
-### `npm start`
+### Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Make sure you have Node.js and npm installed.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Installing
 
-### `npm test`
+1. **Clone the main repo**
+   ```bash
+   git clone https://github.com/NatanBB/desafiowevy.git
+   cd desafiowevy
+   cd web
+   ```
+2. **Install NPM packages**
+   ```bash
+   npm install
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Running the Web
+To start the project, run:
+   ```bash
+   npm start
+   ```
+The web running in http://localhost:3000 by default.
 
-### `npm run build`
+## Project Structure
+```bash
+assets => To all assets
+components => To compact components
+modules => All modules to pages
+pages => main content for pages
+services => api services
+tests => to unit tests
+types => to all types using in project
+utils => to functions and hooks utilities
+```
+```bash
+├── contexts
+│   └── authcontext.tsx      # Authentication context and user management
+├── pages
+│   ├── 404.tsx              # Not Found Page
+│   ├── login.tsx            # Login page
+│   └── main.tsx             # Main task management page
+├── components
+│   ├── AvatarUser.tsx       # Reusable avatar user component
+│   ├── Button.tsx           # Reusable button component
+│   ├── Input.tsx            # Reusable input component
+│   ├── Loading.tsx          # Loading spinner component
+│   └── ToggleButton.tsx     # Toggle button component
+├── modules
+│   ├── listTodo.tsx         # Application list taks module
+│   ├── header.tsx           # Application header module
+│   └── footer.tsx           # Application footer module
+├── services
+│   └── api.tsx              # Axios client configuration for API calls
+├── types
+│   └── commonTypes.ts       # Common data types used in the application
+├── utils
+│   ├── components           # Utility functions, e.g., validation and sorting
+│   ├── protectRouts         # Utility to protect routes autenticated
+│   └── functions            # Custom hooks, e.g., modified useEffect
+├── tests
+│   ├── components           # All components tests
+│   └── functions            # All functions tests
+└── assets
+    └── logo.png             # Application logo
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Key Features
+- Authentication: Login/logout management and session persistence using JWT tokens.
+- Task Management: Full CRUD operations for tasks, including add, edit, delete, and mark as complete.
+- Responsive Interface: Utilization of Tailwind CSS for responsive and user-friendly styles.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Testing
+Unit tests are implemented using Jest and Test Library for functions and componentes. To run tests:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm test
+```
