@@ -1,9 +1,10 @@
 import Fastify from 'fastify';
 import fastifyJwt from '@fastify/jwt';
 import cors from '@fastify/cors';
-import { taskRoutes } from './routes/tasks';
-import { userRoutes } from './routes/users';
-import { authRoutes } from './routes/auth';
+import { authenticate } from './middlewares/authenticated';
+import { authRoutes } from './routes/authRoutes';
+import { userRoutes } from './routes/userRoutes';
+import { taskRoutes } from './routes/taskRoutes';
 
 async function bootstrap() {
   const fastify = Fastify({
@@ -17,6 +18,8 @@ async function bootstrap() {
   await fastify.register(fastifyJwt, {
     secret: 'wevy-fake-token',
   });
+
+  fastify.decorate("authenticate", authenticate);
 
   await fastify.register(authRoutes);
   await fastify.register(userRoutes);
