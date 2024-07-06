@@ -48,14 +48,14 @@ describe('login', () => {
       },
     } as FastifyRequest;
 
-    const reply = {
+    const response = {
       send: jest.fn(),
       status: jest.fn().mockReturnThis(),
     } as unknown as FastifyReply;
 
-    await login(request, reply);
+    await login(request, response);
 
-    expect(reply.status).toHaveBeenCalledWith(401);
-    expect(reply.send).toHaveBeenCalledWith({ error: 'Invalid credentials' });
+    expect(response.status).toHaveBeenCalledWith(401);
+    expect(response.send).toHaveBeenCalledWith({ error: 'Invalid credentials' });
   });
 });

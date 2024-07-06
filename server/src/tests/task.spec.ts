@@ -31,14 +31,14 @@ describe('getAllTasks', () => {
       params: {},
     } as any;
 
-    const reply = {
+    const response = {
       send: jest.fn(),
       status: jest.fn().mockReturnThis(),
     } as any;
 
-    await getAllTasks(request, reply);
+    await getAllTasks(request, response);
 
-    expect(reply.send).toHaveBeenCalledWith(mockTasks);
+    expect(response.send).toHaveBeenCalledWith(mockTasks);
   });
 
   it('should handle errors when fetching tasks', async () => {
@@ -49,15 +49,15 @@ describe('getAllTasks', () => {
       params: {},
     } as any;
 
-    const reply = {
+    const response = {
       send: jest.fn(),
       status: jest.fn().mockReturnThis(),
     } as any;
 
-    await getAllTasks(request, reply);
+    await getAllTasks(request, response);
 
-    expect(reply.status).toHaveBeenCalledWith(400);
-    expect(reply.send).toHaveBeenCalledWith({ error: 'An error occurred while fetching tasks' });
+    expect(response.status).toHaveBeenCalledWith(400);
+    expect(response.send).toHaveBeenCalledWith({ error: 'An error occurred while fetching tasks' });
   });
 });
 
@@ -76,13 +76,13 @@ describe('getUserTasks', () => {
       server: { log: { error: console.error } }, // Mock server.log to avoid 'undefined' error
     } as unknown as FastifyRequest<{ Params: { user_id: string } }>;
 
-    const reply = {
+    const response = {
       send: jest.fn(),
     } as unknown as FastifyReply;
 
-    await getUserTasks(request, reply);
+    await getUserTasks(request, response);
 
-    expect(reply.send).toHaveBeenCalledWith(mockTasks);
+    expect(response.send).toHaveBeenCalledWith(mockTasks);
   });
 
   it('should handle errors when fetching user tasks', async () => {
@@ -95,15 +95,15 @@ describe('getUserTasks', () => {
       server: { log: { error: console.error } }, // Mock server.log to avoid 'undefined' error
     } as unknown as FastifyRequest<{ Params: { user_id: string } }>;
 
-    const reply = {
+    const response = {
       status: jest.fn().mockReturnThis(),
       send: jest.fn(),
     } as unknown as FastifyReply;
 
-    await getUserTasks(request, reply);
+    await getUserTasks(request, response);
 
-    expect(reply.status).toHaveBeenCalledWith(400);
-    expect(reply.send).toHaveBeenCalledWith({ error: 'An error occurred while fetching tasks' });
+    expect(response.status).toHaveBeenCalledWith(400);
+    expect(response.send).toHaveBeenCalledWith({ error: 'An error occurred while fetching tasks' });
   });
 });
 

@@ -54,6 +54,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const logout = () => {
     localStorage.removeItem('token');
     setIsAuthenticated(false);
+    setUser(null);
+    localStorage.clear();
     redirect("/login");
   };
 

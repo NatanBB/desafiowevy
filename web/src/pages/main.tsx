@@ -10,6 +10,7 @@ import { ToggleButton } from '../components/ToggleButton';
 import { useAuth } from '../contexts/AuthContext';
 import { LoadingSpinner } from '../components/Loading';
 import { loadOrder, updateOrder, validateInsert } from '../utils/functions';
+import { useDidMountEffect } from '../utils/hooks';
 
 export const Main = () => {
   const [isCompleteScreen, setIsCompleteScreen] = useState<boolean>(false);
@@ -26,6 +27,10 @@ export const Main = () => {
   //#region Effect
 
   useEffect(() => {
+    handleGetData();
+  }, [])
+
+  useDidMountEffect(() => {
     handleGetData();
   }, [context?.user?.user_id]);
 

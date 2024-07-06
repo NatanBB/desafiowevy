@@ -4,17 +4,17 @@ import { z } from 'zod';
 import { prisma } from '../lib/prisma';
 import { TaskParams, UserParams } from '../@types/common';
 
-export async function getAllTasks(request: FastifyRequest, reply: FastifyReply) {
+export async function getAllTasks(request: FastifyRequest, response: FastifyReply) {
   try {
     const allTasks = await prisma.task.findMany();
-    reply.send(allTasks);
+    response.send(allTasks);
   } catch (error) {
     console.error('GetAll tasks error:', error);
-    reply.status(400).send({ error: 'An error occurred while fetching tasks' });
+    response.status(400).send({ error: 'An error occurred while fetching tasks' });
   }
 }
 
-export async function getUserTasks(request: FastifyRequest<{ Params: UserParams }>, reply: FastifyReply) {
+export async function getUserTasks(request: FastifyRequest<{ Params: UserParams }>, response: FastifyReply) {
   try {
     const { user_id } = request.params as UserParams;
 
@@ -24,14 +24,14 @@ export async function getUserTasks(request: FastifyRequest<{ Params: UserParams 
       },
     });
 
-    reply.send(tasks);
+    response.send(tasks);
   } catch (error) {
     request.server.log.error('Error fetching tasks:', error);
-    reply.status(400).send({ error: 'An error occurred while fetching tasks' });
+    response.status(400).send({ error: 'An error occurred while fetching tasks' });
   }
 }
 
-export async function createTask(request: FastifyRequest, reply: FastifyReply) {
+export async function createTask(request: FastifyRequest, response: FastifyReply) {
   try {
     const createTaskBody = z.object({
       title: z.string(),
@@ -51,14 +51,14 @@ export async function createTask(request: FastifyRequest, reply: FastifyReply) {
       },
     });
 
-    return reply.status(201).send(newTask);
+    return response.status(201).send(newTask);
   } catch (error) {
     console.error('Create task error:', error);
-    return reply.status(400).send({ error: 'An error occurred while creating the task.' });
+    return response.status(400).send({ error: 'An error occurred while creating the task.' });
   }
 }
 
-export async function updateTask(request: FastifyRequest<{ Params: TaskParams }>, reply: FastifyReply) {
+export async function updateTask(request: FastifyRequest<{ Params: TaskParams }>, response: FastifyReply) {
   try {
     const updateTaskSchema = z.object({
       title: z.string(),
@@ -85,7 +85,7 @@ export async function updateTask(request: FastifyRequest<{ Params: TaskParams }>
     });
 
     if (!existingTask) {
-      return reply.status(404).send({ error: 'Task Not Found' });
+      return response.status(404).send({ error: 'Task Not Found' });
     }
 
     const updatedTask = await prisma.task.update({
@@ -102,14 +102,14 @@ export async function updateTask(request: FastifyRequest<{ Params: TaskParams }>
       },
     });
 
-    return reply.send(updatedTask);
+    return response.send(updatedTask);
   } catch (error) {
     console.error('Updating task error:', error);
-    return reply.status(400).send({ error: 'Updating task error.' });
+    return response.status(400).send({ error: 'Updating task error.' });
   }
 }
 
-export async function deleteTask(request: FastifyRequest<{ Params: TaskParams }>, reply: FastifyReply) {
+export async function deleteTask(request: FastifyRequest<{ Params: TaskParams }>, response: FastifyReply) {
   try {
     const { task_id } = request.params;
 
@@ -120,7 +120,7 @@ export async function deleteTask(request: FastifyRequest<{ Params: TaskParams }>
     });
 
     if (!existingTask) {
-      return reply.status(404).send({ error: 'Task Not Found.' });
+      return response.status(404).send({ error: 'Task Not Found.' });
     }
 
     await prisma.task.delete({
@@ -129,9 +129,9 @@ export async function deleteTask(request: FastifyRequest<{ Params: TaskParams }>
       },
     });
 
-    return reply.send({ deleted: true });
+    return response.send({ deleted: true });
   } catch (error) {
     console.error('Error deleting task:', error);
-    return reply.status(400).send({ error: 'Error deleting task.' });
+    return response.status(400).send({ error: 'Error deleting task.' });
   }
 }
