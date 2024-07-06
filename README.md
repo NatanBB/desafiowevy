@@ -23,14 +23,14 @@
   - JWT for authentication
   - Prisma for ORM and database interaction
  
-#### See the backend docs development: 
+#### [See the backend docs development](https://github.com/NatanBB/desafiowevy/blob/main/server/README.md)
 
 - **Frontend**:
   - React
   - TypeScript
   - Axios for HTTP requests
  
-#### See the frontend docs development: 
+#### [See the frontend docs development](https://github.com/NatanBB/desafiowevy/blob/main/web/README.md)
 
 ## Installation
 
