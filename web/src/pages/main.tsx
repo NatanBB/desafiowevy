@@ -9,6 +9,7 @@ import { api } from "../services/api";
 import { ToggleButton } from '../components/ToggleButton';
 import { useAuth } from '../contexts/AuthContext';
 import { LoadingSpinner } from '../components/Loading';
+import { loadOrder, updateOrder, validateInsert } from '../utils/functions';
 
 export const Main = () => {
   const [isCompleteScreen, setIsCompleteScreen] = useState<boolean>(false);
@@ -22,9 +23,19 @@ export const Main = () => {
   const context = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
 
+  //#region Effect
+
   useEffect(() => {
     handleGetData();
   }, [context?.user?.user_id]);
+
+  useEffect(() => {
+    updateOrder(
+      isCompleteScreen,
+      listTodo,
+      listCompletedTodo
+    )
+  }, [isCompleteScreen, listTodo, listCompletedTodo]);
 
   useEffect(() => {
     if (search !== "") {
@@ -44,17 +55,9 @@ export const Main = () => {
     }
   }, [search, isCompleteScreen]);
 
-  const loadOrder = (list: TodoItem[], completed: boolean): TodoItem[] => {
-    const key = completed ? 'completedOrder' : 'todoOrder';
-    const order = JSON.parse(localStorage.getItem(key) || '[]');
-    if (order.length > 0) {
-      const orderedList = order
-        .map((id: string) => list.find(item => item.task_id === id))
-        .filter((item: TodoItem | undefined): item is TodoItem => !!item);
-      return orderedList;
-    }
-    return list;
-  };
+  //#endregion
+
+  //#region changeDataFunctions
 
   const handleGetData = async () => {
     try {
@@ -133,15 +136,7 @@ export const Main = () => {
     }
   };
 
-  const validateInsert = (): boolean => {
-    if (
-      (newDescription == null || newDescription == "") &&
-      (newTitle == null || newTitle == "")
-    ) {
-      return true;
-    }
-    return false;
-  }
+  //#endregion
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -181,11 +176,11 @@ export const Main = () => {
               </div>
               <div className={`mt-0.5 flex ${fullScreen ? "mb-6" : "justify-center sm:justify-start"}`}>
                 <button
-                  className={`block ${validateInsert() ? "cursor-not-allowed" : "cursor-pointer"} select-none rounded-md p-2 text-center bg-gray-800 font-bold text-white mr-2`}
+                  className={`block ${validateInsert(newDescription, newTitle) ? "cursor-not-allowed" : "cursor-pointer"} select-none rounded-md p-2 text-center bg-gray-800 font-bold text-white mr-2`}
                   onClick={() =>
                     handleAddTask(newTitle, newDescription)
                   }
-                  disabled={validateInsert()}
+                  disabled={validateInsert(newDescription, newTitle)}
                 >
                   <Plus
                     strokeWidth={2}

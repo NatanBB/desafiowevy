@@ -1,6 +1,6 @@
 import { ArrowNarrowDown, ArrowNarrowUp, Check, Edit, Trash } from 'tabler-icons-react';
 import { ListTodoProps, TodoItem } from '../types/commonTypes';
-import { formatDate } from '../utils/functions';
+import { formatDate, saveOrder } from '../utils/functions';
 import { useEffect, useState } from 'react';
 
 export const ListTodo = ({
@@ -28,12 +28,6 @@ export const ListTodo = ({
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
-  const saveOrder = (list: TodoItem[], completed: boolean) => {
-    const key = completed ? 'completedOrder' : 'todoOrder';
-    const order = list.map(item => item.task_id);
-    localStorage.setItem(key, JSON.stringify(order));
-  };
 
   const handleMoveUp = (list: TodoItem[], index: number, completed: boolean) => {
     if (index > 0) {
