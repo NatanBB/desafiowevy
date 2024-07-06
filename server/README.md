@@ -10,10 +10,6 @@ To get a local copy up and running follow these simple example steps.
 
 Make sure you have Node.js and npm installed.
 
-```bash
-npm install
-```
-
 ## Installing
 
 1. **Clone the main repo**
