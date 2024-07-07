@@ -52,24 +52,25 @@
    npm install
    npm start
    ```
-4. **Login with different users:**
-   With the application running:
-
-   - First Login:
-   ```bash
-   user: admin
-   password: admin
-   ```
-   - Second Login:
-   ```bash
-   user: natanboos
-   password: fakepasswevy
-   ```
 
 ## Usage
 
 ### Login:
 - Login with fixed credentials. (Obs: Logging functionality may be added in the future.)
+
+#### Login with different users:
+With the application running:
+
+- First Login:
+```bash
+user: admin
+password: admin
+```
+- Second Login:
+```bash
+user: natanboos
+password: fakepasswevy
+```
 
 ### Task Management:
 - Add new tasks.
